@@ -1,0 +1,8 @@
+com\mycompany\pr02tar01\MostrarProductosServlet.class
+com\mycompany\pr02tar01\ConexionBD.class
+com\mycompany\pr02tar01\InsertarProductoServlet.class
+com\mycompany\pr02tar01\JakartaRestConfiguration.class
+com\mycompany\pr02tar01\Producto.class
+com\mycompany\pr02tar01\resources\JakartaEE8Resource.class
+com\mycompany\pr02tar01\EditarProductoServlet.class
+com\mycompany\pr02tar01\EliminarProductoServlet.class
