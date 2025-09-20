@@ -45,6 +45,10 @@ public class SvProductos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         //Prueba
+        /* HttpSession misesion = request.getSession();
+        miSesion.setAttribute("Prueba",prueba);
+        */
     }
 
     /**
