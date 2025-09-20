@@ -42,11 +42,23 @@ body::after {
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 32px;
     color: #2563eb;
     letter-spacing: 1px;
     font-weight: 700;
+    vertical-align: middle;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+.logo-container img {
+    filter: drop-shadow(0 2px 4px rgba(37,99,235,0.2));
+    transition: transform 0.2s;
+}
+.logo-container img:hover {
+    transform: scale(1.05);
 }
 form {
     display: flex;
