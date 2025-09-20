@@ -9,7 +9,7 @@ package productos;
  * @author dmeji
  */
 public class Productos {
-    private int id;
+    private String id;
     private String nombre, descripcion;
     private double precio;
 
@@ -37,7 +37,7 @@ public class Productos {
         this.precio = precio;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
     
