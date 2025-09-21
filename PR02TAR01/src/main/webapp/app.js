@@ -19,9 +19,22 @@ class Producto {
 }
 
 const mostrarMensaje = (msg, exito = true) => {
-    const div = document.getElementById('resultados');
-    div.textContent = msg;
-    div.style.color = exito ? 'green' : 'red';
+    if (exito) {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: msg,
+            showConfirmButton: false,
+            timer: 2000
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: msg,
+            confirmButtonText: 'Entendido'
+        });
+    }
 };
 
 const limpiarFormulario = () => {
@@ -37,17 +50,26 @@ const cargarProductos = () => {
         .then(productos => {
             const tbody = document.querySelector('#tablaProductos tbody');
             tbody.innerHTML = '';
-            productos.forEach(p => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><input type="radio" name="selectProducto" value="${p.id}"></td>
-                    <td>${p.id}</td>
-                    <td>${p.nombre}</td>
-                    <td>${p.descripcion}</td>
-                    <td>${p.precio}</td>
-                `;
-                tbody.appendChild(tr);
-            });
+            if (productos.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted"><strong style="font-size: 1.2em;">No hay productos para mostrar</strong></td></tr>';
+                mostrarMensaje('No hay productos en la base de datos', false);
+            } else {
+                productos.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><input type="radio" name="selectProducto" value="${p.id}"></td>
+                        <td>${p.id}</td>
+                        <td>${p.nombre}</td>
+                        <td>${p.descripcion}</td>
+                        <td>${p.precio}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                mostrarMensaje('Productos cargados correctamente', true);
+            }
+        })
+        .catch(error => {
+            mostrarMensaje('Error al cargar productos: ' + error.message, false);
         });
 };
 
@@ -156,5 +178,3 @@ document.querySelector('#tablaProductos tbody').onclick = e => {
     }
 };
 
-// Cargar productos al inicio
-window.onload = cargarProductos;
