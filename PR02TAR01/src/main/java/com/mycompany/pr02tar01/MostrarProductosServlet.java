@@ -20,6 +20,7 @@ public class MostrarProductosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");  
         List<Producto> productos = new ArrayList<>();
         try (Connection conn = ConexionBD.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT id, nombre, descripcion, precio FROM productos");

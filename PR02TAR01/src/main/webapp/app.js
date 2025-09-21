@@ -11,6 +11,9 @@ class Producto {
         if (!this.nombre || this.nombre.trim() === "") {
             return "El nombre no puede estar vacío.";
         }
+        if (!this.descripcion || this.descripcion.trim() === "") {
+            return "La descripción no puede estar vacía.";
+        }
         if (isNaN(this.precio) || Number(this.precio) <= 0) {
             return "El precio debe ser numérico y mayor a 0.";
         }

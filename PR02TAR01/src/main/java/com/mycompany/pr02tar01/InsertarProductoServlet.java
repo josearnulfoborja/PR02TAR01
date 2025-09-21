@@ -15,6 +15,7 @@ public class InsertarProductoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");  
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
         String precioStr = request.getParameter("precio");
