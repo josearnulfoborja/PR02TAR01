@@ -9,13 +9,13 @@ class Producto {
     }
     validar() {
         if (!this.nombre || this.nombre.trim() === "") {
-            return "El nombre no puede estar vacío.";
+            return "El nombre no puede estar vacio.";
         }
         if (!this.descripcion || this.descripcion.trim() === "") {
-            return "La descripción no puede estar vacía.";
+            return "La descripción no puede estar vacia.";
         }
         if (isNaN(this.precio) || Number(this.precio) <= 0) {
-            return "El precio debe ser numérico y mayor a 0.";
+            return "El precio debe ser numerico y mayor a 0.";
         }
         return null;
     }
@@ -25,7 +25,7 @@ const mostrarMensaje = (msg, exito = true) => {
     if (exito) {
         Swal.fire({
             icon: 'success',
-            title: '¡Éxito!',
+            title: '¡Exito!',
             text: msg,
             showConfirmButton: false,
             timer: 2000
