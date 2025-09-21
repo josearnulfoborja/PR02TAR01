@@ -24,14 +24,28 @@ public class InsertarProductoServlet extends HttpServlet {
         String mensaje = "";
         try {
             precio = Double.parseDouble(precioStr);
-            try (Connection conn = ConexionBD.getConnection();
-                 PreparedStatement ps = conn.prepareStatement("INSERT INTO productos (nombre, descripcion, precio) VALUES (?, ?, ?)") ) {
-                ps.setString(1, nombre);
-                ps.setString(2, descripcion);
-                ps.setDouble(3, precio);
-                int filas = ps.executeUpdate();
-                exito = filas > 0;
-                mensaje = exito ? "Producto insertado correctamente" : "No se pudo insertar el producto";
+            try (Connection conn = ConexionBD.getConnection()) {
+                // Validar si ya existe un producto igual
+                String sqlCheck = "SELECT COUNT(*) FROM productos WHERE nombre=? AND descripcion=? AND precio=?";
+                try (PreparedStatement psCheck = conn.prepareStatement(sqlCheck)) {
+                    psCheck.setString(1, nombre);
+                    psCheck.setString(2, descripcion);
+                    psCheck.setDouble(3, precio);
+                    java.sql.ResultSet rs = psCheck.executeQuery();
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        mensaje = "Ya existe un producto con los mismos datos.";
+                        exito = false;
+                    } else {
+                        try (PreparedStatement ps = conn.prepareStatement("INSERT INTO productos (nombre, descripcion, precio) VALUES (?, ?, ?)") ) {
+                            ps.setString(1, nombre);
+                            ps.setString(2, descripcion);
+                            ps.setDouble(3, precio);
+                            int filas = ps.executeUpdate();
+                            exito = filas > 0;
+                            mensaje = exito ? "Producto insertado correctamente" : "No se pudo insertar el producto";
+                        }
+                    }
+                }
             }
         } catch (Exception e) {
             mensaje = "Error: " + e.getMessage();

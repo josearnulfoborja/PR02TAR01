@@ -68,7 +68,7 @@ const cargarProductos = () => {
                     `;
                     tbody.appendChild(tr);
                 });
-                mostrarMensaje('Productos cargados correctamente', true);
+                // Quite el menaje generico para especificar si se esta guardando o editando
             }
         })
         .catch(error => {
@@ -103,10 +103,12 @@ document.getElementById('btnIngresar').onclick = e => {
     })
     .then(r => r.json())
     .then(res => {
-        mostrarMensaje(res.mensaje, res.exito);
         if (res.exito) {
+            mostrarMensaje('Producto guardado correctamente', true);
             limpiarFormulario();
             cargarProductos();
+        } else {
+            mostrarMensaje(res.mensaje, false);
         }
     });
 };
@@ -139,10 +141,12 @@ document.getElementById('btnEditar').onclick = e => {
     })
     .then(r => r.json())
     .then(res => {
-        mostrarMensaje(res.mensaje, res.exito);
         if (res.exito) {
+            mostrarMensaje('Producto modificado correctamente', true);
             limpiarFormulario();
             cargarProductos();
+        } else {
+            mostrarMensaje(res.mensaje, false);
         }
     });
 };
