@@ -13,8 +13,11 @@ import java.sql.PreparedStatement;
 @WebServlet("/EditarProductoServlet")
 public class EditarProductoServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+
         response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");  
+
         String idStr = request.getParameter("id");
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");

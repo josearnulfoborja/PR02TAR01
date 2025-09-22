@@ -9,12 +9,6 @@ class Producto {
     }
     validar() {
         if (!this.nombre || this.nombre.trim() === "") {
-
-            return "El nombre no puede estar vacío.";
-        }
-        if (isNaN(this.precio) || Number(this.precio) <= 0) {
-            return "El precio debe ser numérico y mayor a 0.";
-
             return "El nombre no puede estar vacio.";
         }
         if (!this.descripcion || this.descripcion.trim() === "") {
@@ -22,7 +16,6 @@ class Producto {
         }
         if (isNaN(this.precio) || Number(this.precio) <= 0) {
             return "El precio debe ser numerico y mayor a 0.";
-
         }
         return null;
     }
@@ -32,7 +25,7 @@ const mostrarMensaje = (msg, exito = true) => {
     if (exito) {
         Swal.fire({
             icon: 'success',
-            title: '¡Éxito!',
+            title: '¡Exito!',
             text: msg,
             showConfirmButton: false,
             timer: 2000
@@ -54,9 +47,7 @@ const limpiarFormulario = () => {
     document.getElementById('precio').value = '';
 };
 
-
 const cargarProductos = () => {
-
     fetch('MostrarProductosServlet')
         .then(r => r.json())
         .then(productos => {
@@ -77,6 +68,7 @@ const cargarProductos = () => {
                     `;
                     tbody.appendChild(tr);
                 });
+                // Quite el menaje generico para especificar si se esta guardando o editando
             }
         })
         .catch(error => {
@@ -192,3 +184,4 @@ document.querySelector('#tablaProductos tbody').onclick = e => {
         document.getElementById('precio').value = tr.children[4].textContent;
     }
 };
+
